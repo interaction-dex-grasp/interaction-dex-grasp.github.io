@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="When Does Touch Matter? Charting the Vision–Interaction Gap in Cluttered Dexterous Grasping.">
+  <title>When Does Touch Matter? — Cluttered Dexterous Grasping</title>
+  <link rel="icon" href="assets/favicon.svg?v=4" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#overview">Skip opening video</a>
+<nav class="sidebar-nav" aria-label="Page sections" inert>
+  <ul>
+    <li><a href="#overview">Video Overview</a></li>
+    <li><a href="#grasping">Cluttered Dexterous Grasping</a></li>
+    <li><a href="#policy-switch">Vision-Only Failure and Recovery</a></li>
+    <li><a href="#results">When Does Touch Matter?</a></li>
+    <li><a href="#sensing">Contact-Guided Grasp Refinement</a></li>
+    <li><a href="#compliance">Compliant Arm and Hand</a></li>
+    <li><a href="#method">Method</a></li>
+    <li><a href="#failures">Failure Modes</a></li>
+  </ul>
+</nav>
+<section class="hero" id="top" aria-label="Paper title and full-screen grasping demonstration">
+  <video id="hero-video" autoplay muted loop playsinline preload="auto" poster="assets/media/hero.jpg" aria-label="Twenty-second real-world grasping demonstration at normal speed"><source src="assets/media/hero.mp4" type="video/mp4"></video>
+  <div class="overlay"></div>
+  <header class="hero-head"><a href="#overview">🎬 Video</a></header>
+  <div class="hero-body"><div class="hero-titles">
+    <h1>When Does Touch Matter?</h1>
+    <p class="hero-subtitle">Charting the Vision–Interaction Gap<br class="desktop-break"> in Cluttered Dexterous Grasping</p>
+    <p class="hero-venue">ICRA 2027 submission</p>
+    <div class="mobile-links"><a href="#overview">🎬 Video</a></div>
+  </div></div>
+  <button id="hero-pause" aria-label="Pause background video">Ⅱ</button>
+</section>
+<main>
+<section class="section" id="overview"><div class="content-width single-width">
+  <h2>Video Overview</h2>
+  <div class="overview-placeholder" aria-label="Overview video coming soon"><div><p>Video coming soon</p><span>A narrated overview of the task, system, and results.</span></div></div>
+</div></section>
+
+<section class="section" id="grasping"><div class="content-width">
+  <h2>Cluttered Dexterous Grasping</h2>
+  <p class="section-text">Retrieving a target from clutter requires a dexterous hand to reach through narrow gaps and establish stable contacts while interacting with nearby objects. We study how sensing requirements change with scene and object demands, combining vision, fingertip tactile sensing, and estimated wrenches on a compliant arm–hand system.</p>
+  <div class="video-row two-columns">
+    <figure><video controls muted loop playsinline preload="none" poster="assets/media/recovery.jpg" aria-label="Persistent recovery under dense clutter"><source src="assets/media/recovery.mp4" type="video/mp4"></video><figcaption>Persistent Recovery under Dense Clutter · 3×</figcaption></figure>
+    <figure><video controls muted loop playsinline preload="none" poster="assets/media/perturbation.jpg" aria-label="Recovery and lift after external perturbations"><source src="assets/media/perturbation.mp4" type="video/mp4"></video><figcaption>Recovery from External Perturbations · 2×</figcaption></figure>
+  </div>
+</div></section>
+
+<section class="section" id="policy-switch"><div class="content-width single-width">
+  <h2>Vision-Only Failure and Recovery</h2>
+  <p class="section-text">Vision only repeatedly contacts the target region but lifts without the target. Starting from the resulting scene, the full policy uses interaction feedback to regrasp, stabilize the target, and complete the lift. This is a sequential policy-switch case study.</p>
+  <figure><video controls muted playsinline preload="none" poster="assets/media/policy-switch.jpg" aria-label="Vision-only attempts followed by the full policy continuing from the terminal scene"><source src="assets/media/policy-switch.mp4" type="video/mp4"></video><figcaption>Vision Only (4×) → Vision + Tactile + Wrenches (1×)</figcaption></figure>
+</div></section>
+
+<section class="section" id="results"><div class="content-width">
+  <h2>When Does Touch Matter?</h2>
+  <p class="section-text">We compare eight controlled policy variants across five conditions, with five trials per policy and condition. The full policy succeeds in <strong>24/25</strong> trials, compared with <strong>14/25</strong> for Vision only. Across the three confined conditions (S3–S5), the difference is <strong>15/15 versus 6/15</strong>.</p>
+  <figure><a href="assets/figures/difficulty_suite.png" target="_blank" rel="noopener"><img src="assets/figures/difficulty_suite.png" loading="lazy" alt="The five reference conditions, from a grasp-tolerant target in dense clutter to a small target in rim-packed clutter."></a><figcaption>Five Scene Conditions with Different Scene and Object Demands</figcaption></figure>
+  <p class="section-text protocol-text">All controlled variants use the same 320 demonstrations, visual inputs, action interface, and compliant controller. Scenes are reset by hand toward each reference layout. Each trial allows repeated autonomous attempts; success requires lifting and retaining the target without human intervention.</p>
+  <div class="table-scroll"><table><caption>Table 1 · Successes / trials. V = Vision, T = Tactile, W = Wrenches.</caption><thead><tr><th scope="col">Policy</th><th scope="col">Input</th><th scope="col">S1</th><th scope="col">S2</th><th scope="col">S3</th><th scope="col">S4</th><th scope="col">S5</th><th scope="col">Overall</th></tr></thead><tbody>
+      <tr><th scope="row">Vision only</th><td>V</td><td>4/5</td><td>4/5</td><td>3/5</td><td>2/5</td><td>1/5</td><td>14/25</td></tr>
+      <tr><th scope="row">Wrench</th><td>V + W</td><td>5/5</td><td>3/5</td><td>3/5</td><td>3/5</td><td>1/5</td><td>15/25</td></tr>
+      <tr><th scope="row">Taxel-Attn</th><td>V + T</td><td>5/5</td><td>4/5</td><td>2/5</td><td>4/5</td><td>3/5</td><td>18/25</td></tr>
+      <tr><th scope="row">GNN</th><td>V + T + W</td><td>5/5</td><td>4/5</td><td>4/5</td><td>4/5</td><td>4/5</td><td>21/25</td></tr>
+      <tr><th scope="row">FC-full</th><td>V + T + W</td><td>5/5</td><td>3/5</td><td>5/5</td><td>3/5</td><td>1/5</td><td>17/25</td></tr>
+      <tr><th scope="row">PolicyConsensus</th><td>V + T + W</td><td>4/5</td><td>3/5</td><td>5/5</td><td>2/5</td><td>1/5</td><td>15/25</td></tr>
+      <tr><th scope="row">Reactive DP</th><td>V + T + W</td><td>4/5</td><td>4/5</td><td>4/5</td><td>4/5</td><td>5/5</td><td>21/25</td></tr>
+      <tr class="ours-row"><th scope="row">VWT-Attn (Ours)</th><td>V + T + W</td><td>5/5</td><td>4/5</td><td>5/5</td><td>5/5</td><td>5/5</td><td>24/25</td></tr>
+    </tbody></table></div>
+  <p class="section-text">Wrench and taxel observations provide complementary gains. Among successful episodes, the full policy also uses fewer full lift attempts and has a lower mean duration in every condition.</p>
+  <details><summary>Execution efficiency</summary><div class="table-scroll"><table><caption>Table 2 · Mean duration in seconds / mean full lift attempts, among successful episodes.</caption><thead><tr><th scope="col">Policy</th><th scope="col">S1</th><th scope="col">S2</th><th scope="col">S3</th><th scope="col">S4</th><th scope="col">S5</th></tr></thead><tbody><tr><th scope="row">Vision only</th><td>19.0 / 1.50</td><td>18.5 / 1.50</td><td>22.7 / 1.67</td><td>38.8 / 2.50</td><td>41.6 / 3.00</td></tr><tr class="ours-row"><th scope="row">VWT-Attn (Ours)</th><td>14.1 / 1.00</td><td>15.7 / 1.00</td><td>22.5 / 1.20</td><td>24.7 / 2.00</td><td>39.4 / 2.40</td></tr></tbody></table></div><p class="table-note">A full lift attempt is an upward end-effector excursion of at least 10 cm. Duration and attempt counts are measured among successful episodes only; Vision only has two successes on S4 and one on S5.</p></details>
+</div></section>
+
+<section class="section" id="sensing"><div class="content-width single-width">
+  <h2>Contact-Guided Grasp Refinement</h2>
+  <p class="section-text">The policy adjusts its contacts before committing to a lift. Synchronized tactile measurements show the contact distribution changing as the fingers establish a supported grasp. The hand carries four PaXini pads with 508 three-axis taxels.</p>
+  <figure><video controls muted playsinline preload="none" poster="assets/media/refinement.jpg" aria-label="Grasp refinement with synchronized fingertip tactile measurements"><source src="assets/media/refinement.mp4" type="video/mp4"></video><figcaption>Real-World Grasp Refinement with Synchronized Tactile Measurements · 1×</figcaption></figure>
+</div></section>
+
+<section class="section" id="compliance"><div class="content-width single-width">
+  <h2>Compliant Arm and Hand</h2>
+  <p class="section-text">The platform combines an xArm7 arm, a 16-DoF LEAP hand, four tactile pads, and two RGB-D cameras. Estimated external wrenches drive arm and fingertip admittance, allowing the robot to yield during contact. Every evaluated policy uses this controller, including Vision only.</p>
+  <figure class="setup-figure"><img src="assets/figures/setup.png" loading="lazy" alt="Physical platform with xArm7, LEAP–PaXini hand, and two RGB-D cameras."><figcaption>Shared Hardware and Compliance across the Controlled Policy Variants</figcaption></figure>
+</div></section>
+
+<section class="section" id="method"><div class="content-width">
+  <h2>Method</h2>
+  <p class="section-text">The policy receives a target–context point cloud, proprioception, and the enabled interaction channels. A point encoder and tactile attention encoder produce visual and tactile features, which are concatenated with wrench and proprioceptive states. A diffusion policy predicts arm and hand references executed through the shared compliant controller.</p>
+  <figure><a href="assets/figures/method.png" target="_blank" rel="noopener"><img src="assets/figures/method.png" loading="lazy" alt="Multimodal observations, modality encoders, diffusion policy, and compliant controller."></a><figcaption>Multimodal Policy and Compliant Execution</figcaption></figure>
+  <p class="section-text method-note">The experiments vary the available modalities, interaction encoding, and fusion or action-generation architecture while keeping the demonstrations and control interface fixed.</p>
+</div></section>
+
+<section class="section" id="failures"><div class="content-width">
+  <h2>Failure Modes</h2>
+  <p class="section-text">The policy can lose track of the target when it becomes fully occluded in both policy cameras, or stall without making progress. Thick fingertips also limit access to narrow gaps. These remain challenges for persistent state estimation, recovery, and hand design.</p>
+  <figure><img src="assets/figures/failure_cases.png" loading="lazy" alt="Failure from complete target occlusion in the policy views, and a local action stall."><figcaption>External Camera Views of Target Occlusion and Local Action Stalling</figcaption></figure>
+</div></section>
+</main>
+<footer><p>Website format adapted from <a href="https://contact-grounded-policy.github.io/" target="_blank" rel="noopener">Contact-Grounded Policy</a>.</p><a href="#top">Back to top</a></footer>
+</body>
+</html>

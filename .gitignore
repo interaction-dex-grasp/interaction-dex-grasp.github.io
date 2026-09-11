@@ -1,0 +1,14 @@
+# Publish only the static website and its assets.
+/*
+!/.gitignore
+!/.nojekyll
+!/index.html
+!/style.css
+!/script.js
+!/assets/
+/assets/*
+!/assets/favicon.svg
+!/assets/fonts/
+!/assets/figures/
+!/assets/media/
+**/.DS_Store
