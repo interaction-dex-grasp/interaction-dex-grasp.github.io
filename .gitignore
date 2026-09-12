@@ -5,10 +5,25 @@
 !/index.html
 !/style.css
 !/script.js
+!/trials.js
 !/assets/
 /assets/*
 !/assets/favicon.svg
 !/assets/fonts/
 !/assets/figures/
 !/assets/media/
+!/assets/trials/
 **/.DS_Store
+# Keep export tools, raw manifests, and other files out of public asset folders.
+/assets/trials/*
+!/assets/trials/*.mp4
+!/assets/trials/*.jpg
+!/assets/trials/index.json
+/assets/media/*
+!/assets/media/*.mp4
+!/assets/media/*.jpg
+/assets/figures/*
+!/assets/figures/*.png
+/assets/fonts/*
+!/assets/fonts/*.ttf
+!/assets/fonts/fonts.css

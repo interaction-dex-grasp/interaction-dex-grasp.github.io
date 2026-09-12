@@ -3,3 +3,35 @@
 @media(max-width:1100px){.sidebar-nav{display:none}.content-width:not(.single-width){width:90%}.hero h1{font-size:64px}.hero-subtitle{font-size:40px}.hero-venue{font-size:24px}}
 @media(max-width:768px){.hero{min-height:520px}.hero-head{display:none}.hero-body{padding:48px 24px}.hero h1{font-size:48px;line-height:1.125;margin-bottom:8px}.hero-subtitle{font-size:24px;line-height:1.25}.hero-venue{font-size:16px;line-height:1.25;margin-top:28px}.desktop-break{display:none}.mobile-links{display:flex;justify-content:center;gap:7px;margin-top:20px;pointer-events:auto}.mobile-links a{background:#363636;color:white;border-radius:24px;padding:7px 16px;font-size:16px}.hero>video{object-position:56% center}.section{padding:40px 20px}.content-width:not(.single-width){width:100%}h2{font-size:24px;line-height:1.2}.section-text{text-align:left;font-size:15px;line-height:1.6}.two-columns{grid-template-columns:1fr;gap:28px}figcaption{font-size:14px}.overview-placeholder p{font-size:20px}.overview-placeholder span{font-size:12px;padding:0 20px}.table-scroll table{font-size:12px}.table-scroll th,.table-scroll td{padding:8px}.hero button{bottom:12px;right:12px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.sidebar-nav{transition:none}}
+
+/* Evaluation recordings: fetch video only after an explicit play action. */
+.trial-instruction{font-size:14px;color:#666;margin-top:24px}
+#success-table td:has(.trial-cell){padding:0}
+.trial-cell{display:block;width:100%;padding:9px 11px;border:0;background:transparent;color:#2865a6;text-decoration:underline;text-underline-offset:4px;text-decoration-color:#b8cde6;font:inherit}
+.trial-cell:hover{background:#edf4fc;color:#194b80}
+.trial-cell[aria-expanded=true]{background:#e6effa;box-shadow:inset 0 -2px #3578c4;color:#194b80;font-weight:600}
+.trial-gallery{margin:8px 0 30px;padding:22px 0 18px;border-top:1px solid #d8e0e9;border-bottom:1px solid #d8e0e9;scroll-margin:24px}
+.trial-gallery[hidden],.trial-navigation[hidden],.trial-play[hidden],.trial-error[hidden]{display:none}
+.trial-gallery-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.trial-gallery h3{font-family:'Google Sans','Noto Sans',sans-serif;font-size:21px;font-weight:500;line-height:1.3;color:#303943;margin:0 0 4px}
+#trial-summary,.trial-navigation p,.trial-duration{font-size:13px;color:#737b84}
+.trial-close{border:0;background:none;font-size:26px;line-height:1;padding:4px 8px;color:#737b84}
+#trial-loading:not(:empty){padding:20px 0;color:#737b84;font-size:14px}
+.trial-navigation{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 10px}
+.trial-navigation>div{display:flex;gap:8px}
+.trial-navigation button{background:white;color:#3578c4;border:1px solid #d8e0e9;width:36px;height:32px;font-size:19px;line-height:1;border-radius:3px}
+.trial-navigation button:disabled{opacity:.3;cursor:default}
+.trial-strip{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;padding:2px 0 12px;scrollbar-width:thin;scrollbar-color:#c5d1df #f5f7fa}
+.trial-card{flex:0 0 calc((100% - 40px)/2.15);min-width:0;scroll-snap-align:start}
+.trial-card figcaption{display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left;font-family:inherit;font-size:14px;color:#444;margin:0 0 8px}
+.trial-outcome{font-size:12px;font-weight:500}.trial-outcome.success{color:#26734c}.trial-outcome.failure{color:#b94343}
+.trial-media{position:relative;background:#f2f4f6}
+.trial-media video{aspect-ratio:4/3;box-shadow:none;background:#f2f4f6;object-fit:contain}
+.trial-play{position:absolute;inset:0;display:grid;place-items:center;border:0;background:transparent;color:white}
+.trial-play span{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:rgba(22,32,44,.68);padding-left:3px;font-size:19px;transition:background .15s}
+.trial-play:hover span{background:#3578c4}
+.trial-duration{margin-top:7px}
+.trial-error{font-size:13px;color:#b94343;margin-top:8px}
+@media(max-width:768px){.trial-cell{padding:10px 9px;min-height:42px}.trial-card{flex-basis:88%}.trial-gallery h3{font-size:19px}.trial-navigation p{font-size:12px}.trial-strip{gap:20px}.trial-gallery{padding-top:18px}}
+
+.trial-timing-note{margin-top:8px;color:#737b84;font-size:12px;line-height:1.5}

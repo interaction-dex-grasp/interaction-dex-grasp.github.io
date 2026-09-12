@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="When Does Touch Matter? Charting the Vision–Interaction Gap in Cluttered Dexterous Grasping.">
   <title>When Does Touch Matter? — Cluttered Dexterous Grasping</title>
-  <link rel="icon" href="assets/favicon.svg?v=4" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon.svg?v=5" type="image/svg+xml">
   <link rel="stylesheet" href="assets/fonts/fonts.css">
   <link rel="stylesheet" href="style.css">
   <script defer src="script.js"></script>
+  <script defer src="trials.js"></script>
 </head>
 <body>
 <a class="skip-link" href="#overview">Skip opening video</a>
@@ -62,16 +63,30 @@
   <p class="section-text">We compare eight controlled policy variants across five conditions, with five trials per policy and condition. The full policy succeeds in <strong>24/25</strong> trials, compared with <strong>14/25</strong> for Vision only. Across the three confined conditions (S3–S5), the difference is <strong>15/15 versus 6/15</strong>.</p>
   <figure><a href="assets/figures/difficulty_suite.png" target="_blank" rel="noopener"><img src="assets/figures/difficulty_suite.png" loading="lazy" alt="The five reference conditions, from a grasp-tolerant target in dense clutter to a small target in rim-packed clutter."></a><figcaption>Five Scene Conditions with Different Scene and Object Demands</figcaption></figure>
   <p class="section-text protocol-text">All controlled variants use the same 320 demonstrations, visual inputs, action interface, and compliant controller. Scenes are reset by hand toward each reference layout. Each trial allows repeated autonomous attempts; success requires lifting and retaining the target without human intervention.</p>
-  <div class="table-scroll"><table><caption>Table 1 · Successes / trials. V = Vision, T = Tactile, W = Wrenches.</caption><thead><tr><th scope="col">Policy</th><th scope="col">Input</th><th scope="col">S1</th><th scope="col">S2</th><th scope="col">S3</th><th scope="col">S4</th><th scope="col">S5</th><th scope="col">Overall</th></tr></thead><tbody>
-      <tr><th scope="row">Vision only</th><td>V</td><td>4/5</td><td>4/5</td><td>3/5</td><td>2/5</td><td>1/5</td><td>14/25</td></tr>
+  <p class="trial-instruction">Watch all 50 Vision-only and Ours trials, including successes and failures. Select a scene result in either row to view its five recordings.</p>
+  <div class="table-scroll"><table id="success-table"><caption>Table 1 · Successes / trials. V = Vision, T = Tactile, W = Wrenches.</caption><thead><tr><th scope="col">Policy</th><th scope="col">Input</th><th scope="col">S1</th><th scope="col">S2</th><th scope="col">S3</th><th scope="col">S4</th><th scope="col">S5</th><th scope="col">Overall</th></tr></thead><tbody>
+      <tr><th scope="row">Vision only</th><td>V</td><td><button type="button" class="trial-cell" data-policy="vision" data-scene="S1" aria-expanded="false" aria-controls="trial-gallery">4/5</button></td><td><button type="button" class="trial-cell" data-policy="vision" data-scene="S2" aria-expanded="false" aria-controls="trial-gallery">4/5</button></td><td><button type="button" class="trial-cell" data-policy="vision" data-scene="S3" aria-expanded="false" aria-controls="trial-gallery">3/5</button></td><td><button type="button" class="trial-cell" data-policy="vision" data-scene="S4" aria-expanded="false" aria-controls="trial-gallery">2/5</button></td><td><button type="button" class="trial-cell" data-policy="vision" data-scene="S5" aria-expanded="false" aria-controls="trial-gallery">1/5</button></td><td>14/25</td></tr>
       <tr><th scope="row">Wrench</th><td>V + W</td><td>5/5</td><td>3/5</td><td>3/5</td><td>3/5</td><td>1/5</td><td>15/25</td></tr>
       <tr><th scope="row">Taxel-Attn</th><td>V + T</td><td>5/5</td><td>4/5</td><td>2/5</td><td>4/5</td><td>3/5</td><td>18/25</td></tr>
       <tr><th scope="row">GNN</th><td>V + T + W</td><td>5/5</td><td>4/5</td><td>4/5</td><td>4/5</td><td>4/5</td><td>21/25</td></tr>
       <tr><th scope="row">FC-full</th><td>V + T + W</td><td>5/5</td><td>3/5</td><td>5/5</td><td>3/5</td><td>1/5</td><td>17/25</td></tr>
       <tr><th scope="row">PolicyConsensus</th><td>V + T + W</td><td>4/5</td><td>3/5</td><td>5/5</td><td>2/5</td><td>1/5</td><td>15/25</td></tr>
       <tr><th scope="row">Reactive DP</th><td>V + T + W</td><td>4/5</td><td>4/5</td><td>4/5</td><td>4/5</td><td>5/5</td><td>21/25</td></tr>
-      <tr class="ours-row"><th scope="row">VWT-Attn (Ours)</th><td>V + T + W</td><td>5/5</td><td>4/5</td><td>5/5</td><td>5/5</td><td>5/5</td><td>24/25</td></tr>
+      <tr class="ours-row"><th scope="row">VWT-Attn (Ours)</th><td>V + T + W</td><td><button type="button" class="trial-cell" data-policy="ours" data-scene="S1" aria-expanded="false" aria-controls="trial-gallery">5/5</button></td><td><button type="button" class="trial-cell" data-policy="ours" data-scene="S2" aria-expanded="false" aria-controls="trial-gallery">4/5</button></td><td><button type="button" class="trial-cell" data-policy="ours" data-scene="S3" aria-expanded="false" aria-controls="trial-gallery">5/5</button></td><td><button type="button" class="trial-cell" data-policy="ours" data-scene="S4" aria-expanded="false" aria-controls="trial-gallery">5/5</button></td><td><button type="button" class="trial-cell" data-policy="ours" data-scene="S5" aria-expanded="false" aria-controls="trial-gallery">5/5</button></td><td>24/25</td></tr>
     </tbody></table></div>
+  <section id="trial-gallery" class="trial-gallery" aria-labelledby="trial-heading" hidden>
+    <div class="trial-gallery-heading">
+      <div><h3 id="trial-heading">Trial recordings</h3><p id="trial-summary"></p></div>
+      <button type="button" class="trial-close" aria-label="Close trial recordings">×</button>
+    </div>
+    <p id="trial-loading" role="status" aria-live="polite"></p>
+    <div class="trial-navigation" hidden>
+      <p>Cam 1 · Original speed · Select a video to play</p>
+      <div><button type="button" class="trial-prev" aria-label="Previous trial">←</button><button type="button" class="trial-next" aria-label="Next trial">→</button></div>
+    </div>
+    <div class="trial-strip" tabindex="0" role="region" aria-label="Five trial recordings; scroll horizontally to browse"></div>
+    <p class="trial-timing-note">Recording lengths include setup and ending footage. Table 2 uses the evaluation timing defined in the paper.</p>
+  </section>
   <p class="section-text">Wrench and taxel observations provide complementary gains. Among successful episodes, the full policy also uses fewer full lift attempts and has a lower mean duration in every condition.</p>
   <details><summary>Execution efficiency</summary><div class="table-scroll"><table><caption>Table 2 · Mean duration in seconds / mean full lift attempts, among successful episodes.</caption><thead><tr><th scope="col">Policy</th><th scope="col">S1</th><th scope="col">S2</th><th scope="col">S3</th><th scope="col">S4</th><th scope="col">S5</th></tr></thead><tbody><tr><th scope="row">Vision only</th><td>19.0 / 1.50</td><td>18.5 / 1.50</td><td>22.7 / 1.67</td><td>38.8 / 2.50</td><td>41.6 / 3.00</td></tr><tr class="ours-row"><th scope="row">VWT-Attn (Ours)</th><td>14.1 / 1.00</td><td>15.7 / 1.00</td><td>22.5 / 1.20</td><td>24.7 / 2.00</td><td>39.4 / 2.40</td></tr></tbody></table></div><p class="table-note">A full lift attempt is an upward end-effector excursion of at least 10 cm. Duration and attempt counts are measured among successful episodes only; Vision only has two successes on S4 and one on S5.</p></details>
 </div></section>
