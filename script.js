@@ -11,10 +11,10 @@ const heroObserver = new IntersectionObserver(entries=>entries.forEach(({isInter
   if(!isIntersecting)hero.pause();else if(!manualPause&&!reduceMotion.matches&&!saveData)hero.play().catch(()=>{});
 }),{threshold:.2});heroObserver.observe(hero);
 const demos=document.querySelectorAll('main video');
-demos.forEach(video=>{video.loop=true;video.addEventListener('play',()=>hero.pause());});
+demos.forEach(video=>{video.loop=!video.hasAttribute('data-manual-play');video.addEventListener('play',()=>hero.pause());});
 const demoObserver=new IntersectionObserver(entries=>entries.forEach(({target,isIntersecting})=>{
   if(!isIntersecting)target.pause();
-  else if(!reduceMotion.matches&&!saveData)target.play().catch(()=>{});
+  else if(!target.hasAttribute('data-manual-play')&&!reduceMotion.matches&&!saveData)target.play().catch(()=>{});
 }),{threshold:.2});demos.forEach(v=>demoObserver.observe(v));
 const nav=document.querySelector('.sidebar-nav');
 const links=[...nav.querySelectorAll('a')];

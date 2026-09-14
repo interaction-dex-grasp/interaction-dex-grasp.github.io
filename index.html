@@ -23,6 +23,7 @@
     <li><a href="#compliance">Compliant Arm and Hand</a></li>
     <li><a href="#method">Method</a></li>
     <li><a href="#failures">Failure Modes</a></li>
+    <li><a href="#implementation">Implementation Notes</a></li>
   </ul>
 </nav>
 <section class="hero" id="top" aria-label="Paper title and full-screen grasping demonstration">
@@ -99,7 +100,7 @@
 
 <section class="section" id="compliance"><div class="content-width single-width">
   <h2>Compliant Arm and Hand</h2>
-  <p class="section-text">The platform combines an xArm7 arm, a 16-DoF LEAP hand, four tactile pads, and two RGB-D cameras. Estimated external wrenches drive arm and fingertip admittance, allowing the robot to yield during contact. Every evaluated policy uses this controller, including Vision only.</p>
+  <p class="section-text">The platform combines an xArm7 arm, a 16-DoF LEAP hand, four tactile pads, and two RGB-D cameras. Estimated external wrenches drive arm and fingertip admittance, allowing the robot to yield during contact. Every controlled policy variant uses this controller, including Vision only.</p>
   <figure class="setup-figure"><img src="assets/figures/setup.png" loading="lazy" alt="Physical platform with xArm7, LEAP–PaXini hand, and two RGB-D cameras."><figcaption>Shared Hardware and Compliance across the Controlled Policy Variants</figcaption></figure>
 </div></section>
 
@@ -114,6 +115,29 @@
   <h2>Failure Modes</h2>
   <p class="section-text">The policy can lose track of the target when it becomes fully occluded in both policy cameras, or stall without making progress. Thick fingertips also limit access to narrow gaps. These remain challenges for persistent state estimation, recovery, and hand design.</p>
   <figure><img src="assets/figures/failure_cases.png" loading="lazy" alt="Failure from complete target occlusion in the policy views, and a local action stall."><figcaption>External Camera Views of Target Occlusion and Local Action Stalling</figcaption></figure>
+</div></section>
+<section class="section" id="implementation"><div class="content-width single-width">
+  <h2>Implementation Notes</h2>
+  <details class="implementation-note">
+    <summary>ClutterDexGrasp reproduction and hardware deployment</summary>
+    <div class="note-content">
+      <p>We independently reproduce the teacher–student approach of <a href="https://clutterdexgrasp.github.io/" target="_blank" rel="noopener">ClutterDexGrasp</a> in our simulation environment. The vision-only DP3 student uses a 5D segmented point cloud and absolute hand joint targets. It achieves <strong>50.2% simulation success</strong> over 1,280 trials.</p>
+      <p>The original paper’s Table 1 reports 80.9–92.6% success for its teacher and 73.5–90.8% for its student. Our simulator, embodiment, and evaluation scenes differ, so these numbers are not a matched comparison. The clips below show a successful lift and a failed attempt from our student checkpoint.</p>
+      <div class="video-row two-columns">
+        <figure><video data-manual-play controls muted playsinline preload="none" poster="assets/media/clutter-sim-success.jpg" aria-label="Reproduced ClutterDexGrasp student successfully lifting a cylinder in simulation"><source src="assets/media/clutter-sim-success.mp4" type="video/mp4"></video><figcaption>Simulation · Successful lift · 1×</figcaption></figure>
+        <figure><video data-manual-play controls muted playsinline preload="none" poster="assets/media/clutter-sim-failure.jpg" aria-label="Reproduced ClutterDexGrasp student failing to lift a bottle in a separate simulation probe"><source src="assets/media/clutter-sim-failure.mp4" type="video/mp4"></video><figcaption>Simulation · Failed lift · 1×</figcaption></figure>
+      </div>
+      <p>In a preliminary single-object hardware test with arm and hand compliance enabled, the reproduced student moved rapidly downward into the table, prompting an emergency stop. The tested checkpoint did not transfer safely to our hardware.</p>
+      <figure class="hardware-probe"><video data-manual-play controls muted playsinline preload="none" poster="assets/media/clutter-hardware.jpg" aria-label="Single-object hardware test of the reproduced student, interrupted by an emergency stop"><source src="assets/media/clutter-hardware.mp4" type="video/mp4"></video><figcaption>Hardware · Single-object probe · Emergency stop · 1×</figcaption></figure>
+    </div>
+  </details>
+  <details class="implementation-note">
+    <summary>RDP: why the fast decoder uses sensor-local taxels</summary>
+    <div class="note-content">
+      <p>Our main policy represents taxel positions in the world frame. The sensor-local exception is the fast decoder in our <a href="https://reactive-diffusion-policy.github.io/" target="_blank" rel="noopener">Reactive Diffusion Policy (RDP)</a> baseline; it does not change the representation used by our main policy.</p>
+      <p>RDP combines a slow planner with a fast decoder that reacts to interaction observations. In our initial implementation using world-frame taxels, we observed nearly stationary arm behavior. These coordinates also reveal hand pose, which we suspect allowed the decoder to reproduce the current pose instead of following the planned motion. Using sensor-local coordinates removed this behavior in our tests. The RDP results in Table 1 use this sensor-local configuration.</p>
+    </div>
+  </details>
 </div></section>
 </main>
 <footer><p>Website format adapted from <a href="https://contact-grounded-policy.github.io/" target="_blank" rel="noopener">Contact-Grounded Policy</a>.</p><a href="#top">Back to top</a></footer>
